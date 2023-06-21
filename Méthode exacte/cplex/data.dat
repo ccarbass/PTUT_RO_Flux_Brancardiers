@@ -1,0 +1,46 @@
+/*********************************************
+ * OPL 22.1.0.0 Data
+ * Author: cacar
+ * Creation Date: 2 juin 2023 at 09:01:38
+ *********************************************/
+SheetConnection donnees("missions.xlsx");
+SheetConnection brancardiers("brancardiers.xlsx");
+SheetConnection matrice("matrice.xlsx");
+NbMissions     from SheetRead(donnees, "G2"); // Nb de missions
+NbMissions1    from SheetRead(donnees, "H2"); // Nb de missions à 1 brancardier
+NbBrancardiers from SheetRead(donnees, "F2"); // Nb de brancardiers
+
+Duree from SheetRead(donnees, "B2:B82"); // Duree moyenne estime des missions
+Hrdv  from SheetRead(donnees, "C2:C82"); // heures de rdv des missions
+R     from SheetRead(donnees, "E2:E82"); // Retard max toléré
+
+Hdeb_mat from SheetRead(brancardiers, "F2:F13"); // Heure de début de travail
+Hfin_mat from SheetRead(brancardiers, "H2:H13"); // Heure de début de travail
+Hdeb_apm from SheetRead(brancardiers, "J2:J13"); // Heure de début de travail
+Hfin_apm from SheetRead(brancardiers, "L2:L13"); // Heure de fin de travail
+TraMax   from SheetRead(brancardiers, "N2:N13"); // Charge max
+
+Dist from SheetRead(matrice, "C3:CE83"); // tps de trajet à vide entre 2 missions
+	
+
+SheetConnection result("Resultats_CPLEX.xlsx");
+b to SheetWrite(result, "A1");
+md to SheetWrite(result, "B1");
+ti to SheetWrite(result, "C1");
+hrdvi to SheetWrite(result, "D1");
+ma to SheetWrite(result, "E1");
+tj to SheetWrite(result, "F1");
+hrdvj to SheetWrite(result, "G1");
+lateC to SheetWrite(result, "J1");
+
+bran to SheetWrite(result,"A2:A1000");
+m1 to SheetWrite(result,"B2:B1000");
+hdep to SheetWrite(result,"C2:C1000");
+hrdv to SheetWrite(result,"D2:D1000");
+m2 to SheetWrite(result,"E2:E1000");
+hdep2 to SheetWrite(result,"F2:F1000");
+hrdv2 to SheetWrite(result, "G2:G1000");
+hfin_mat to SheetWrite(result, "H2:H1000");
+hdeb_apm to SheetWrite(result, "I2:I1000");
+lateCumu to SheetWrite(result, "J2");
+ 
